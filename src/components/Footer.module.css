@@ -1,0 +1,40 @@
+.footer {
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-6);
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+  text-align: center;
+}
+
+.copy {
+  font-size: var(--fs-100);
+  color: var(--color-text-muted);
+}
+
+.socials {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.socials a {
+  display: inline-flex;
+  color: var(--color-text-secondary);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.socials a:hover {
+  color: var(--color-accent);
+}
+
+@media (min-width: 640px) {
+  .row {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}

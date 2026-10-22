@@ -1,0 +1,235 @@
+.hero {
+  position: relative;
+  padding-block: var(--space-9) var(--space-10);
+  min-height: 88svh;
+  display: flex;
+  align-items: center;
+  overflow: clip;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--color-border-strong) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 90%);
+  opacity: 0.5;
+}
+
+.blobA,
+.blobB {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.35;
+  animation: drift 18s ease-in-out infinite;
+}
+
+.blobA {
+  top: -10%;
+  left: 8%;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+}
+
+.blobB {
+  bottom: -15%;
+  right: 6%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, var(--color-accent-strong) 0%, transparent 70%);
+  animation-delay: -9s;
+  animation-direction: reverse;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -24px) scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blobA,
+  .blobB {
+    animation: none;
+  }
+}
+
+.grid {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--space-8);
+  text-align: center;
+}
+
+.avatarWrap {
+  flex-shrink: 0;
+}
+
+.text {
+  max-width: 640px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-100);
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-4);
+}
+
+.greeting {
+  font-size: var(--fs-500);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.name {
+  font-size: var(--fs-900);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.role {
+  margin-top: var(--space-3);
+  font-size: var(--fs-600);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.tagline {
+  margin-top: var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-400);
+  line-height: var(--lh-relaxed);
+}
+
+.actions {
+  margin-top: var(--space-7);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.ctaArrow {
+  display: inline-flex;
+  transform: rotate(-90deg);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.actions a:hover .ctaArrow,
+.actions a:focus-visible .ctaArrow {
+  transform: rotate(-90deg) translateX(4px);
+}
+
+.socials {
+  margin-top: var(--space-7);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-5);
+}
+
+.socials a {
+  color: var(--color-text-secondary);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.socials a[data-icon='github'] {
+  color: #181717;
+}
+
+.socials a[data-icon='linkedin'] {
+  color: #0a66c2;
+}
+
+.socials a[data-icon='email'] {
+  color: #ea580c;
+}
+
+.socials a:hover,
+.socials a:focus-visible {
+  transform: translateY(-4px) scale(1.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .socials a:hover,
+  .socials a:focus-visible,
+  .ctaArrow {
+    transform: none;
+  }
+}
+
+.stagger1,
+.stagger2,
+.stagger3,
+.stagger4,
+.stagger5 {
+  opacity: 0;
+  animation: rise var(--duration-normal) var(--ease-out) forwards;
+}
+
+.stagger1 {
+  animation-delay: 60ms;
+}
+.stagger2 {
+  animation-delay: 140ms;
+}
+.stagger3 {
+  animation-delay: 220ms;
+}
+.stagger4 {
+  animation-delay: 300ms;
+}
+.stagger5 {
+  animation-delay: 380ms;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .text {
+    max-width: 620px;
+  }
+
+  .actions,
+  .socials {
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,357 @@
+/* ---------- Mobile top bar (<1024px) ---------- */
+
+.mobileHeader {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-strong));
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 120ms linear;
+}
+
+.mobileBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding-inline: var(--space-5);
+}
+
+.brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--fs-400);
+  color: var(--color-accent);
+  letter-spacing: -0.02em;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.brand.active::after {
+  content: '';
+  display: block;
+  margin-top: 2px;
+  height: 2px;
+  background: var(--color-nav-accent);
+  border-radius: 999px;
+}
+
+.menuToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.menuToggle:hover {
+  color: var(--color-accent);
+}
+
+.mobileNav {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-raised);
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-normal) var(--ease-out);
+}
+
+.mobileNav > ul {
+  overflow: hidden;
+}
+
+.mobileNavOpen {
+  grid-template-rows: 1fr;
+}
+
+.mobileNav ul {
+  display: flex;
+  flex-direction: column;
+  padding-inline: var(--space-5);
+  gap: var(--space-1);
+}
+
+.mobileNav li {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.mobileNavOpen li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mobileNav a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  font-size: var(--fs-400);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mobileNav a.active {
+  color: var(--color-accent);
+}
+
+.mobileNav li:first-child a {
+  padding-top: var(--space-4);
+}
+
+.mobileNav li:last-child a {
+  border-bottom: none;
+  padding-bottom: var(--space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileNav li {
+    transition: opacity var(--duration-fast) linear;
+    transform: none;
+  }
+}
+
+/* ---------- Desktop vertical rail (>=1024px) ---------- */
+
+.rail {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .mobileHeader {
+    display: none;
+  }
+
+  .rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--nav-rail-width);
+    padding-block: var(--space-6);
+    background: transparent;
+    overflow: visible;
+    z-index: 100;
+  }
+
+  .railBrand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: #fff;
+    background: var(--gradient-nav-accent);
+    box-shadow: var(--shadow-float-accent);
+    transition:
+      transform var(--duration-normal) var(--ease-out),
+      box-shadow var(--duration-normal) var(--ease-out);
+  }
+
+  .railBrand.active {
+    box-shadow:
+      0 0 0 4px var(--color-nav-accent-bg),
+      var(--shadow-float-accent);
+  }
+
+  .railBrand:hover,
+  .railBrand:focus-visible {
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 18px 32px -12px var(--color-nav-accent-border);
+  }
+
+  .railTrack {
+    position: relative;
+    width: 3px;
+    flex: 1;
+    max-height: 100px;
+    margin-block: var(--space-5);
+    background: var(--color-border);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .railProgress {
+    position: absolute;
+    inset: 0;
+    transform-origin: top;
+    transform: scaleY(0);
+    background: var(--gradient-nav-accent);
+    transition: transform 120ms linear;
+  }
+
+  .railList {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 44px;
+    overflow: visible;
+    gap: var(--space-4);
+  }
+
+  .railList a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    padding-inline: 0;
+    color: var(--color-text-muted);
+    background: var(--color-bg-raised);
+    box-shadow: var(--shadow-float);
+    overflow: hidden;
+    white-space: nowrap;
+    transition:
+      color var(--duration-normal) var(--ease-out),
+      background var(--duration-normal) var(--ease-out),
+      box-shadow var(--duration-normal) var(--ease-out),
+      width var(--duration-normal) var(--ease-out),
+      padding var(--duration-normal) var(--ease-out),
+      transform var(--duration-normal) var(--ease-out);
+  }
+
+  .railList a svg {
+    flex: none;
+    margin-inline: auto;
+    transition: margin var(--duration-normal) var(--ease-out);
+  }
+
+  .railList a .label {
+    display: inline-block;
+    max-width: 0;
+    margin-left: 0;
+    opacity: 0;
+    font-size: var(--fs-100);
+    font-weight: 600;
+    overflow: hidden;
+    transition:
+      max-width var(--duration-normal) var(--ease-out),
+      margin var(--duration-normal) var(--ease-out),
+      opacity var(--duration-fast) var(--ease-out);
+  }
+
+  .railList a:hover,
+  .railList a:focus-visible,
+  .railList a.active {
+    width: auto;
+    padding-inline: var(--space-4);
+    color: #fff;
+    background: var(--gradient-nav-accent);
+    box-shadow: var(--shadow-float-accent);
+    transform: translateX(4px) scale(1.03);
+  }
+
+  .railList a:hover svg,
+  .railList a:focus-visible svg,
+  .railList a.active svg {
+    margin-inline: 0;
+  }
+
+  .railList a:hover .label,
+  .railList a:focus-visible .label,
+  .railList a.active .label {
+    max-width: 140px;
+    margin-left: var(--space-2);
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .railBrand,
+    .railList a,
+    .railList a svg,
+    .railList a .label {
+      transition: none;
+    }
+  }
+
+  /* Tooltip */
+  [data-tooltip] {
+    position: relative;
+  }
+
+  [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%) translateX(-6px);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-sm);
+    background: var(--color-text);
+    color: var(--color-bg-raised);
+    font-size: var(--fs-100);
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
+  }
+
+  [data-tooltip]:hover::after,
+  [data-tooltip]:focus-visible::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .railSocials {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .railSocials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: var(--color-text-muted);
+    background: var(--color-bg-raised);
+    box-shadow: var(--shadow-float);
+    transition:
+      color var(--duration-normal) var(--ease-out),
+      background var(--duration-normal) var(--ease-out),
+      box-shadow var(--duration-normal) var(--ease-out),
+      transform var(--duration-normal) var(--ease-out);
+  }
+
+  .railSocials a:hover,
+  .railSocials a:focus-visible {
+    color: var(--color-nav-accent);
+    background: var(--color-nav-accent-bg);
+    box-shadow: var(--shadow-float-accent);
+    transform: translateX(4px) translateY(-2px) scale(1.08);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .railSocials a {
+      transition: none;
+    }
+  }
+}
